@@ -1,0 +1,793 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <title>Robo Car v2.0</title>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+  <!-- CSS Files -->
+  <link href="css/bootstrap.min.materialkit.css" rel="stylesheet" />
+  <link href="css/material-kit.css" rel="stylesheet"/>
+  <link href="css/Material+Icons.css" rel="stylesheet"/>
+  <link href="css/Roboto.css" rel="stylesheet"/>
+  <link href="css/font-awesome.min.css" rel="stylesheet"/>
+  <link href="css/demo.css" rel="stylesheet" />
+  <link href="css/animate.min.css" rel="stylesheet" />
+
+  <!-- Alertify -->
+  <link rel="stylesheet" href="css/alertify/alertify.core.css" />
+  <link rel="stylesheet" href="css/alertify/alertify.default.css" id="toggleCSS" />
+  <!-- ion_range -->
+  <link rel="stylesheet" href="css/normalize.css" />
+  <link rel="stylesheet" href="css/ion.rangeSlider.css" />
+  <link rel="stylesheet" href="css/ion.rangeSlider.skinFlat.css" />
+
+  <script src="js/jquery.min.js" type="text/javascript"></script>
+
+<style type="text/css">
+   #camera_control_table{
+      margin-top: 10px;
+    }
+    #camera_control{
+        font-size: 30px;
+        color: #986;
+        width: 20px;
+        height: 10px;
+    }
+    .car_control{
+        font-size: 80px;
+        color: #8800a1  ;
+    }
+    .car_control_table td{
+      height: 50%;
+      width: auto;
+    }
+    .car_control_table td{
+      width: 100px;
+      height: 100px;
+    }
+</style>
+</head>
+
+<body>
+<style type="text/css">
+  input[type='checkbox']{
+    margin-right: 20px;
+  }
+  .driving{
+    background-color: yellow;
+  }
+  .control td i:hover{
+    cursor:pointer;
+  }
+  .control td{
+    background-color: white;
+  }
+  #stop{
+    padding: 10px;
+    color: red;
+    font-size: 86px;
+  }
+</style>
+<div class="wrapper text-center">
+  <div class="header header-filter" style="min-height: 120px;">
+  </div>
+
+  <div class="main main-raised">
+    <div class="section section-basic">
+      <div class="container" style="margin-top: -50px;">
+        <div id="alert_container" style="height: 25px;display: block;" class="alert alert-success" >
+          <div class="container" style="width: 98%;margin-top: -10px;">
+            <button type="button" class="close pull-right" data-dismiss="alert" aria-label="Close">
+              <span><i class="material-icons">clear</i></span>
+            </button>
+            <b style="font-size: 15px;" id="alert_message" class="pull-left">.....</b>
+          </div>
+        </div>
+        <!-- <div id="content"><h1><a href="home/test" target="_blank" >HERE</a></h1></div> -->
+        <ul class="nav nav-pills" id="nav-control" role="tablist">
+              <!--
+                color-classes: "nav-pills-primary", "nav-pills-info", "nav-pills-success", "nav-pills-warning","nav-pills-danger"
+              -->
+              <li class="active">
+                <a href="#Manual" role="tab" data-toggle="tab">
+                  <i class="material-icons">dashboard</i>
+                  Manual Control
+                </a>
+              </li>
+              <li>
+                <a href="#Auto" role="tab" data-toggle="tab">
+                  <i class="material-icons">schedule</i>
+                  Auto Tracing
+                </a>
+              </li>
+
+            </ul>
+            <div class="row" style="border:2px dashed #F8F;">
+
+              <div class="tab-content">
+                <div id="Manual" class="tab-pane fade in active">
+                  <h3>Manual Control</h3>
+                  <p>
+                    <table id="car_control_table" class="table table-normal control">
+                      <form name="auto_form" style="min-height: 20px;">
+                        <span  class="togglebutton" >
+                          <label style="font-size: 17px;color:#444;">
+                            <input type="checkbox" id="toggle_speed" class="toggle_speed" />
+                            Auto adjustable speed
+                          </label>
+                        </span>
+                      </form>
+                      <form name="driving_keys" id="driving_keys" style="min-height: 20px;">
+                        <span  class="togglebutton" >
+                          <label style="font-size: 17px;color:#444;">
+                            <input id="option_key_handler" type="checkbox"/>
+                            Handle keyboard
+                          </label>
+                        </span>
+                      </form>
+                      <tr>
+                        <td></td>
+                        <!-- background-color: #DDD; -->
+                        <td><a  id="m_up"><i class="fa fa-angle-double-up car_control"></i></a></td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td><a id="m_left"><i class="fa fa-angle-double-left car_control"></i></a></td>
+                        <td><a id="stop"><i class="fa fa-stop-circle-o car_control"></i></td>
+                        <td><a id="m_right"><i class="fa fa-angle-double-right car_control"></i></a></td>
+                      </tr>
+                      <tr>
+                        <td></td>
+                        <td><a  id="m_down"><i class="fa fa-angle-double-down car_control"></i></a></td>
+                        <td></td>
+                      </tr>
+                    </table>
+                  </p>
+                </div>
+                <div id="Auto" class="tab-pane fade">
+                  <h3>Auto Tracing</h3>
+                  <p>
+                    <div class="container">
+                      <div>
+                        <span style="min-height: 20px;">
+                          <span class="togglebutton" >
+                            <label style="font-size: 17px;color:#444;">
+                              <input type="checkbox" class="toggle_speed" />
+                              Auto adjustable speed
+                            </label>
+                          </span>
+                        </span>
+                      </div>
+                      <!-- <div>
+                        <span style="min-height: 20px;">
+                          <span class="togglebutton" >
+                            <label style="font-size: 17px;color:#444;">
+                              <input type="checkbox">
+                              Start Immediately
+                            </label>
+                          </span>
+                        </span>
+                      </div> -->
+                      <div>
+                        <table class="table">
+                          <tr>
+                            <td width="10%"><h3 style="margin-top: 30px;">Scale:</h3></td>
+                            <td>
+                              <h4 style="color: red;"><b>Note: </b> each 1 cm of canvas will be multiplied by the value of scale.</h4>
+                              <input style="margin-top: 20%;" type="text" class="scale" value="" name="range" />
+                            </td>
+                          </tr>
+                        </table>
+                        <canvas style="background-color:#EEF;" class="canvas" id="sketch_canvas"></canvas>
+
+                        <script type="text/javascript">
+                          $(function() { $('#sketch_canvas').sketch(); });
+                        </script>
+                      </div>
+                      <div>
+                        <div class="col-md-6">
+                          <a href="#sketch_canvas" data-download="png">
+                            <button class="btn btn-info btn-raised pull-right" style="font-size:20px;width: 100%;">Download</button>
+                          </a></div>
+                          <div class="col-md-6">
+                            <button  style="font-size: 20px;width: 100%;" class="btn btn-raised btn-primary pull-left">Procceed
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </p>
+                  </div>
+                  <div id="Video" class="tab-pane fade">
+                    <h3>Pick an Imgae or Run Video Recorder</h3>
+                    <p>
+
+                    </p>
+                  </div>
+                  <div id="Camera" class="tab-pane fade">
+                    <h3>Rotate Motors of the Camera bases as you want</h3>
+                    <p>
+                      <div class="container">
+
+                        <table id="camera_control_table" class="table table-bordered">
+                          <tr>
+                            <td>
+                              <h3>Horizontal Angle</h3>
+                              <a onclick="">
+                                <input id="knob_H"
+                                data-width="120"
+                                data-height="120"
+                                data-angleOffset=90
+                                data-angleArc=360
+                                data-fgColor="#35E"
+                                data-rotation="anticlockwise"
+                                data-min="0" data-max="360"
+                                data-step="20"
+                                value="90">
+                              </a>
+                            </td>
+                            <td>
+                              <h3>Vertical Angle</h3>
+                              <a>
+                                <input id="knob_V"
+                                data-width="120"
+                                data-height="120"
+                                data-angleOffset=270
+                                data-angleArc=180
+                                data-fgColor="#F28"
+                                data-rotation="anticlockwise"
+                                data-min="0" data-max="180"
+                                data-step="20"
+                                value="20">
+                              </a>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </p>
+                  </div>
+                </div>
+                <table id="camera_control_table" class="table table-bordered col-sm-12 col-md-12">
+                  <tr>
+                    <div class="col-sm-6 col-md-5" id="change_speed">
+                      <h3>Manual set velocity:</h3>
+                      <a>
+                        <input id="knob_Velocity"
+                        data-width="120"
+                        data-height="120"
+                        data-angleOffset=225
+                        data-angleArc=270
+                        data-fgColor="#dd2e2e"
+                        data-rotation="clockwise"
+                        data-min="10" data-max="100"
+                        value="10">
+                      </a>
+                    </div>
+                    <div class="col-sm-6 col-md-7">
+                      <h3>Current Spped:</h3>
+                      <canvas id="gauge"></canvas>
+                    </div>
+                  </tr>
+                  <tr>
+                    <div class="col-sm-12 col-md-12">
+                    <!-- <iframe style="width: 90%; height: 90%; padding: 10px;" class="embed-responsive-item" src="http://192.168.8.104:8081/"></iframe> -->
+                  </div>
+                  </tr>
+                </table>
+<!--                 <div>
+                  <div class="col-md-6 bordered" id="div_velocity">
+                    <h3 class="pull-left">Velocity:</h3>
+                    <br><br><br>
+                    <input type="text" class="velocity" value="" name="range" />
+                  </div>
+                  <div class="col-md-6">
+                  <div class="sidebar-widget">
+                      <canvas width="150" height="80" id="foo" class="" style="margin-top: 20px; width: 160px; height: 140px;"></canvas>
+                      <div class="goal-wrapper">
+                        <span class="gauge-value pull-left">cm/s&nbsp;&nbsp;</span>
+                        <span id="gauge-text" class="gauge-value pull-left">100</span>
+                        <span id="goal-text" class="goal-value pull-right">500 cm/s</span>
+                      </div>
+                    </div><br><br><br>
+                  </div>
+
+                </div><br><br><br><br> -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+<footer class="footer">
+    <div class="container">
+      <nav class="pull-left">
+        <ul>
+          <li>
+            <a href="#">
+               About Us
+           </a>
+       </li>
+       <li>
+          <a href="#">
+             Our Project
+         </a>
+     </li>
+ </ul>
+</nav>
+<div class="copyright pull-right">
+    &copy; 2017, Powered By <i class="material-icons">face</i>Mohammad AlYasfo
+</div>
+</div>
+</footer>
+</div>
+
+<!--Start Connection Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" style="max-width:500px;max-height:300px;">
+    <div class="modal-content">
+      <div class="modal-header" style="font-size:20px;">
+        <h3 class="modal-title">Establishing the connection, Please wait ...</h3>
+      </div>
+      <div class="modal-body">
+        <img style="margin:20px;width:80%;" src="img/loading.gif"/>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END  Connection Modal -->
+</body>
+<!--   Core JS Files   -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/jquery-ui.js" type="text/javascript"></script>
+<script src="js/material.min.js" type="text/javascript"></script>
+<script src="js/material-kit.js" type="text/javascript"></script>
+<!-- Alertify -->
+<script src="js/alertify.js"></script>
+<!-- Sketch -->
+<script src="js/sketch.js" type="text/javascript"></script>
+<!-- range slider -->
+<script src="js/ion.rangeSlider.min.js" type="text/javascript"></script>
+<!-- i-check -->
+<script src="js/icheck.min.js" type="text/javascript"></script>
+<!-- knob -->
+<script src="js/jquery.knob.min.js" type="text/javascript"></script>
+<!-- Gauge -->
+<script>
+    var CANV_GAUGE_FONTS_PATH = 'fonts';
+    var MAX_SPEED = 100;
+    var SPEED = 0.0;
+    var UPDATE_INTERVAL = 300;
+    var URL_SERVER = 'ws://192.168.43.105:5000/'; //simn-X556UJ
+    var UPDATE_CONNECTION_DELAY = 4000;
+    var BOUNCE = 500;
+    var key_handling = false;
+
+    var socket;
+    var call = {}
+    var object = {}
+    var interval;
+    var result = {};
+
+</script>
+<script src="js/gauge.js" type="text/javascript"></script>
+<!-- SOCKET -->
+<script type="text/javascript">
+$(document).on('click', function (e) {
+    if (e.originalEvent.defaultPrevented) return;
+    // continue
+});
+
+window.onload = function() {
+
+  // var resultJSON = '{"FirstName":"John","LastName":"Doe","Email":"johndoe@johndoe.com","Phone":"123 dead drive"}';
+
+  // $('#myModal').modal({backdrop: 'static', keyboard: false});
+  try{
+    $(".modal").modal('show');
+    var can_send = false;
+
+    socket = new WebSocket(URL_SERVER);
+
+    socket.onopen = function(){
+      console.log("connected");
+      $(".modal").modal('hide');
+      $('#alert_message').html('Successful Connection');
+      can_send = true;
+    };
+    var error_exist = false;
+
+
+    socket.onmessage = function (message) {
+      // ultra_right.innerHTML = message.data.split(',')[1];
+      result = JSON.parse(message.data);
+      // console.log(result);
+      // var temp = {Key1:10,Key2:20,error:'I am an error'};
+      if(result.hasOwnProperty('speed'))
+      {
+          SPEED = result.speed;
+      }
+      if(result.hasOwnProperty('error'))
+      {
+        error_exist = true;
+        $('#alert_container').attr('class','alert alert-danger');
+        $('#alert_message').html(result.error);
+        $('#alert_container').effect( "shake" );
+        console.log('************* ERROR OCCURED *************');
+
+        interval = setInterval(function() {
+        if(error_exist)
+          {
+            $('#alert_container').attr('class','alert alert-danger');
+            $('#alert_message').html(result.error);
+            $('#alert_container').effect( "shake" );
+          }
+        },2000);
+      }
+      else if(result.hasOwnProperty('success'))
+      {
+        error_exist = false;
+        clearInterval(interval);
+        $('#alert_container').attr('class','alert alert-success');
+        $('#alert_message').html(result.success);
+        // delete result.error;
+      }
+      // $('#alert_container').attr('class','alert alert-success');
+
+      // De-packaging
+      for (var property in result) {
+        if (result.hasOwnProperty(property)) {
+          $('#' + property).html(result[property]);
+        }
+      }
+      // # serach for a parsing way for multi values
+
+
+
+    };
+    var delay = UPDATE_CONNECTION_DELAY;
+    socket.onclose = function(){
+      console.log("disconnected");
+      can_send = false;
+      setTimeout(function(){
+        try {
+          socket = new WebSocket(URL_SERVER);
+        } catch(e) {
+          alertify.error('Can\'t connect!: '+e)
+          console.log(e);
+          $('#alert_container').attr('class','alert alert-danger');
+          $('#alert_message').html("Server is Disconnected");
+          $('#alert_container').effect( "shake" );
+        }
+      }, delay); // timeout : try to reconnect again
+    };
+    // function sendit(m) {
+    //     console.log('Try to Send ...');
+    //     if(can_send)
+    //     {
+    //         socket.send("{\"hello\":\"" + m + "\"}");
+    //         console.log('Value { ' + m +' } has SENT');
+    //     } else {
+    //         console.log('Sending Failed');
+    //     }
+    // }
+    //
+    // var value = 0;
+    // setInterval(function() {
+    //     sendit(value);
+    //     value += 10;
+    // },10000);
+
+  } catch(err)
+      {
+        alert("Error with creating the WebSocket"+err);
+      }
+
+  // $("*[id^='m__']").click(function() {
+  //   $(this).parent('td').css('background-color', '#000');
+  // });
+  // $("*[id^='m__']").mouseup(function() {
+  //   $(this).parent('td').css('background-color', '#FFF');
+  //   // stop();
+  // });
+
+  // $('#m_up').click(repeater_for=setInterval(function(){
+  //   send_movement('F');
+  //   console.log('Clicked F');
+  // }, BOUNCE));
+  // $('#m_up').mouseup(clearInterval(repeater_for)); // NOT WORKING
+
+
+  function send_movement(direction) {
+    object = {}
+    object.direction = direction;
+    var message = JSON.stringify(object);
+    // console.log('trying: ' + object.direction);
+    if(can_send)
+    {
+      socket.send(message);
+      // console.log('Client Move:' + message);
+    }
+  }
+
+  function stop() {
+    object = {}
+    object.stop = 'true';
+    var message = JSON.stringify(object);
+    if(can_send)
+      socket.send(message);
+  }
+  $('#stop').click(function(){stop();})
+
+$(document).bind("keyup keydown", function(e){
+    if(key_handling){
+      // console.log(e.keyCode);
+     switch(e.keyCode){
+       case 104:
+           send_movement('F');
+       break;
+       case 98:
+           send_movement('B');
+       break;
+       case 102:
+           send_movement('R');
+       break;
+       case 100:
+           send_movement('L');
+       break;
+       case 101:
+           stop();
+       break;
+
+       case 87:
+           send_movement('F');
+       break;
+       case 83:
+           send_movement('B');
+       break;
+       case 68:
+           send_movement('R');
+       break;
+       case 65:
+           send_movement('L');
+       break;
+       case 32:
+           stop();
+       break;
+       default:
+       break;
+       }
+    }
+
+
+// document.getElementById ("btnsave").addEventListener ("click", resetEmotes, false);
+//   $(document).keydown(function (eventObject) {
+//    if(key_handling == true){
+//    console.log(eventObject.keyCode);
+//    switch(eventObject.keyCode){
+//        case 100:
+//            call.rotate_right();
+//        break;
+//        case 97:
+//            call.rotate_left();
+//        break;
+//        case 119:
+//            call.move_forward();
+//        break;
+//        case 115:
+//            call.move_backward();
+//        break;
+//        default:
+//        break;
+//        }
+//     }
+//   });
+
+});
+
+$('#m_right').click(function() { send_movement('R'); });
+$('#m_left').click(function() { send_movement('L'); });
+$('#m_up').click(function() { send_movement('F'); });
+$('#m_down').click(function() { send_movement('B'); });
+  // switch(event.target.id) {
+  //         case 'm_right':
+  //             rotate_right();
+  //         break;
+  //         case 'm_left':
+  //            rotate_left();
+  //         break;
+  //         case 'm_up':
+  //             move_forward();
+  //         break;
+  //         case 'm_down':
+  //            move_backward();
+  //         break;
+  //         default:
+  //             stop();
+  //         break;
+  //     }
+
+        $("#knob_Velocity").knob({
+            change: function (value) {
+                //console.log("change : " + value);
+            },
+            release: function (value) {
+                object = {}
+                object.change_speed = value;
+                socket.send(JSON.stringify(object));
+                console.log("Sending : ");
+                console.log(object);
+            },
+            cancel: function () {
+                console.log("cancel : ", this);
+            },
+            /*format : function (value) {
+             return value + '%';
+         },*/
+         draw: function () {
+
+                // "tron" case
+                if (this.$.data('skin') == 'tron') {
+
+                    this.cursorExt = 0.3;
+
+                    var a = this.arc(this.cv) // Arc
+                    ,
+                        pa // Previous arc
+                        , r = 1;
+
+                        this.g.lineWidth = this.lineWidth;
+
+                        if (this.o.displayPrevious) {
+                            pa = this.arc(this.v);
+                            this.g.beginPath();
+                            this.g.strokeStyle = this.pColor;
+                            this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
+                            this.g.stroke();
+                        }
+
+                        this.g.beginPath();
+                        this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
+                        this.g.stroke();
+
+                        this.g.lineWidth = 2;
+                        this.g.beginPath();
+                        this.g.strokeStyle = this.o.fgColor;
+                        this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
+                        this.g.stroke();
+
+                        return false;
+                    }
+                }
+            });
+    $(function () {
+        $(".scale").ionRangeSlider({
+            type: "single",
+            min: 20,
+            max: 300,
+            from: 40
+        });
+        $(".velocity").ionRangeSlider({
+            type: "single",
+            min: 1,
+            max: 500,
+            from: 10,
+            to: 490,
+            max_interval: 10
+        });
+
+    });
+    // var g_width = $(this).parent(0);
+    // console.log(g_width);
+    var gauge = new Gauge({
+        renderTo    : 'gauge',
+        width       : 260,
+        height      : 260,
+        glow        : false,
+        units       : 'cm/s',
+        title       : false,
+        minValue    : 0,
+        maxValue    : MAX_SPEED,
+        majorTicks  : ['00','10','20','30','40','50','60','70','80','90','100'],
+        minorTicks  : 2,
+        strokeTicks : true,
+        highlights  : [{ from : 70, to : 100, color : 'rgba(200, 50, 50, .75)' }],
+        colors      : {
+            plate      : '#FFF',
+            majorTicks : '#333',
+            minorTicks : '#222',
+            title      : '#333',
+            units      : '#000',
+            numbers    : '#000',
+            needle     : {
+                start : 'rgba(200, 50, 50, .75)',
+                end : 'rgba(200, 50, 50, .75)',
+                circle: {
+                    outerStart: 'rgba(200, 200, 200, 1)',
+                    outerEnd: 'rgba(200, 200, 200, 1)'
+                },
+                shadowUp: true,
+                shadowDown: false
+            }
+
+        },
+        valueBox: {
+            visible: false
+        },
+        valueText: {
+            visible: true
+        },
+        circles: {
+            outerVisible: false,
+            middleVisible: true,
+            innerVisible: true
+        },
+        needle: {
+            type: 'arrow',
+            width: 4,
+            end: 70,
+            circle: {
+                size: 7,
+                inner: false,
+                outer: true
+            }
+        },
+        animation: {
+            delay: 10,
+            duration: 1500,
+            fn: 'linear'
+        }
+    });
+
+    gauge.onready = function() {
+        setInterval( function() {
+            gauge.setValue(SPEED);
+            // console.log(SPEED);
+        }, UPDATE_INTERVAL);
+    };
+    window.onresize= function() {
+        gauge.updateConfig({
+            // width  : document.body.offsetWidth,
+            // height : document.body.offsetHeight
+        });
+    };
+    gauge.draw();
+
+
+    $('#option_key_handler').click(function(event) {
+        if(event.target.checked)
+            {
+                key_handling = true;
+                alertify.success('Keyboard Handler is ON');
+                alertify.set({delay:18000});
+                alertify.log("<span>W  <i class='fa fa-arrow-circle-up'></i></span> / <span>S  <i class='fa fa-arrow-circle-down'></i></span> / <span>D  <i class='fa fa-arrow-circle-right'></i></span> / <span>A  <i class='fa fa-arrow-circle-left'></i></span> / ");
+            }
+        else
+            {
+                alertify.error('Keyboard Handler is OFF');
+                key_handling = false;
+            }
+    });
+        $('.toggle_speed').click(function(event) {
+        object = {}
+        if(event.target.checked)
+            {
+                $('#change_speed').hide(300);
+                key_handling = true;
+                alertify.success('Speed will be adjusted automatically');
+                object.manual_speed = 'manual';
+            }
+        else
+            {
+                $('#change_speed').show(300);
+                key_handling = false;
+                alertify.success('Speed is manualy controlled');
+                object.manual_speed = 'auto';
+            }
+        var message = JSON.stringify(object);
+        console.log(message);
+        socket.send(message);
+    });
+};
+</script>
+</html>

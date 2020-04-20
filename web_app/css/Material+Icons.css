@@ -1,0 +1,64 @@
+/* fallback */
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'),
+  url(../fonts/roboto/2fcrYFNaTjcS6g4U3t-Y5ZjZjT5FdEJ140U2DJYC3mY.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+}
+.navbar.navbar-special {
+  background-color: #0b3607;
+  color: #ffffff;
+}
+.navbar.navbar-special .navbar-form .form-group input.form-control::-moz-placeholder,
+.navbar.navbar-special .navbar-form input.form-control::-moz-placeholder {
+  color: #ffffff;
+}
+.navbar.navbar-special .navbar-form .form-group input.form-control:-ms-input-placeholder,
+.navbar.navbar-special .navbar-form input.form-control:-ms-input-placeholder {
+  color: #ffffff;
+}
+.navbar.navbar-special .navbar-form .form-group input.form-control::-webkit-input-placeholder,
+.navbar.navbar-special .navbar-form input.form-control::-webkit-input-placeholder {
+  color: #ffffff;
+}
+.navbar.navbar-special .dropdown-menu {
+  border-radius: 3px !important;
+}
+.navbar.navbar-special .dropdown-menu li > a:hover, .navbar.navbar-special .dropdown-menu li > a:focus {
+  color: #FFFFFF;
+  background-color: #0b3607;
+}
+.navbar.navbar-special .dropdown-menu .active > a {
+  background-color: #0b3607;
+  color: #ffffff;
+}
+.navbar.navbar-special .dropdown-menu .active > a:hover, .navbar.navbar-special .dropdown-menu .active > a:focus {
+  color: #ffffff;
+}
+.navbar-inverse {
+  background-color: #3f51b5;
+}
+.navbar.navbar-transparent {
+  background-color: transparent;
+  box-shadow: none;
+}
+.navbar-fixed-top {
+  border-radius: 0;
+}

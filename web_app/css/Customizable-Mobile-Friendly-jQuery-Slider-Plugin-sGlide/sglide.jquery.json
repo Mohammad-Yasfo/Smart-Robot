@@ -1,0 +1,36 @@
+{
+    "name": "sglide",
+    "title": "sGlide",
+    "description": "jQuery plugin that generates a simple slider, that's highly flexible, feature-rich & mobile-ready.",
+    "keywords": [
+        "slider",
+        "loadbar",
+        "gauge",
+        "vertical",
+        "smart",
+        "snapping",
+        "dynamic",
+        "mobile",
+        "arrow",
+        "keys"
+    ],
+    "version": "2.2.0",
+    "author": {
+        "name": "Daniel Kazmer",
+        "email": "dkazmer@live.ca",
+        "url": "http://webshifted.com"
+    },
+    "licenses": [
+        {
+            "type": "GPL",
+            "url": "http://www.gnu.org/licenses/gpl.html"
+        }
+    ],
+    "bugs": "https://github.com/dkazmer/sGlide/issues",
+    "homepage": "https://github.com/dkazmer/sGlide",
+    "docs": "https://github.com/dkazmer/sGlide",
+    "demo": "http://webshifted.com/sGlide/",
+    "dependencies": {
+        "jquery": ">=1.7"
+    }
+}
