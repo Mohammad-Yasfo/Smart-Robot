@@ -1,5 +1,5 @@
 # Smart Robot
-Build a Smart Robot Using Raspberry Pi "[Blog]()".
+Build a Smart Robot Using Raspberry Pi "[Blog](https://medium.com/@mohammadalyasfo/build-a-smart-robot-using-raspberry-pi-58cfdcefeece?sk=803702bd9bf13cf33ff2dde4eff15b18)".
 
 ### The Requirements: Hardware
 
